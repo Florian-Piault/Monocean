@@ -17,19 +17,24 @@
     <label for="">Mot de passe</label>
     <input type="password" name="password" id="password" v-model="password" />
 
-    <button type="submit">Login</button>
+    <button type="submit">Register</button>
   </form>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
 
-export default class Login extends Vue {
+@Component
+export default class Register extends Vue {
+  name = "Register";
+
+  // DATA
   private lastname = "";
   private firstname = "";
   private email = "";
   private password = "";
 
+  // METHODS
   private checkSubmit(): void {
     Vue.axios
       .post("http://localhost:3000/auth/register", {
@@ -45,3 +50,19 @@ export default class Login extends Vue {
   }
 }
 </script>
+
+<style scoped>
+input {
+  width: 120px;
+  margin: 0 4px;
+}
+
+label {
+  margin: 0 4px;
+}
+
+button {
+  float: right;
+  margin: 4px;
+}
+</style>

@@ -17,9 +17,11 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Login extends Vue {
   name = "Login";
 
+  // DATA
   private email = "";
   private password = "";
 
+  // METHODS
   private checkSubmit(): void {
     this.axios
       .post(
@@ -37,3 +39,19 @@ export default class Login extends Vue {
   }
 }
 </script>
+
+<style scoped>
+input {
+  width: 120px;
+  margin: 0 4px;
+}
+
+label {
+  margin: 0 4px;
+}
+
+button {
+  float: right;
+  margin: 4px;
+}
+</style>

@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
     <h1>Poisson 🐟</h1>
     <h2>Bloub bloub... 🐠</h2>
   </div>
@@ -15,3 +13,11 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class Home extends Vue {}
 </script>
+
+<style scoped>
+.home {
+  height: calc(100vh - 64px);
+  background-color: #65c5ff66;
+  background-image: linear-gradient(353deg, #65c5ff66 0%, #80d0c766 99%);
+}
+</style>
