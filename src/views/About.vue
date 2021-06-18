@@ -5,9 +5,9 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped src="../assets/css/variables.css">
 .about {
-  height: calc(100vh - 64px);
+  height: calc(100vh - var(--headerHeight));
   background-color: #65c5ff66;
   background-image: linear-gradient(353deg, #65c5ff66 0%, #80d0c766 99%);
 }

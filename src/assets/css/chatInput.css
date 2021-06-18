@@ -1,0 +1,60 @@
+@import './variables.css';
+
+.input-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: var(--inputChatWidth);
+	height: var(--inputChatHeight);
+	transform: translate(-50%, calc(var(--inputChatHeight) / 2));
+}
+
+input {
+	position: absolute;
+	height: var(--inputChatHeight);
+	width: var(--inputChatWidth);
+	border-radius: 50px;
+	padding: 0 16px;
+	filter: drop-shadow(0px 5px 12px rgba(0, 0, 0, 0.05));
+}
+
+input,
+input:active,
+input:focus,
+input:target,
+input:focus-within,
+input:focus-visible {
+	border: 2px solid var(--green);
+	outline: none;
+}
+
+button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	height: var(--inputChatHeight);
+	width: var(--btnChatWidth);
+	background-color: var(--green);
+	border-radius: 50px;
+}
+
+button,
+button:active,
+button:focus,
+button:target,
+button:focus-within,
+button:focus-visible {
+	border: 2px solid var(--green);
+	outline: none;
+}
+
+button:hover {
+	cursor: pointer;
+	opacity: 50%;
+}

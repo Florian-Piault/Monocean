@@ -1,0 +1,15 @@
+@import './variables.css';
+
+.home {
+	height: calc(100vh - var(--headerHeight));
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.momo {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 256px;
+}

@@ -1,0 +1,12 @@
+:root {
+	--yellow: #ffc91d;
+	--blue: #1d386d;
+	--green: #95e8b7;
+	--lightGrey: #eaf1f8;
+
+	--headerHeight: 95px;
+
+	--inputChatHeight: 48px;
+	--inputChatWidth: 50vw;
+	--btnChatWidth: 128px;
+}

@@ -3,63 +3,90 @@
     <div class="chatbot-story">
       <ChatMessages :discussion="messages" />
     </div>
+    <div class="momo"><img src="@/assets/momo.gif" alt="" /></div>
     <div class="chatbot-input">
       <input type="text" v-model="userInput" @keyup.enter="send()" autofocus />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+<script>
+/* eslint-disable */
 import ChatMessages from "./ChatMessages.vue";
 
-@Component({
+export default {
+  name: "ChatBoard",
   components: {
     ChatMessages,
   },
-})
-export default class ChatBoard extends Vue {
-  name = "ChatBoard";
-  private userInput = "";
-  private messages: Array<{ text: string; sender: string }> = [];
-
-  private randomReply(): { text: string; sender: string } {
-    const random = Math.floor(Math.random() * 10);
-    const reply = [
-      "Bonjour je suis un message",
-      "Je suis le Capitaine Momo",
-      "Êtes-vous un étudiant ?",
-      "Êtes-vous un étudiant ?",
-      "Are you OK ?",
-      "What ??",
-      "Je suis en train de manger des pâtes",
-      "👻",
-      "AHAHAHAHA",
-      "Bonjour le monde",
+  data() {
+    return {
+      userInput: "",
+      messages: [],
+    };
+  },
+  mounted() {
+    const actions = [
+      {
+        action: () => this.$store.commit("nextStep", 1),
+        label: "Recherche",
+      },
+      {
+        action: () => this.$store.commit("nextStep", 10),
+        label: "Contact",
+      },
     ];
-    return { text: reply[random], sender: "reply" };
-  }
+    this.sendReply("Bonjour que recherches-tu ?", "button", actions);
+  },
+  methods: {
+    scriptedReply() {
+      const userInput = this.messages[this.messages.length - 1].text;
+      const greetings = new RegExp(
+        /(bonjour|bjr|salut|slt|hi|hello|coucou|cc|yo)($|\s)/gim
+      );
 
-  private scriptedReply(): string {
-    const greetings = new RegExp(
-      /(bonjour|bjr|salut|slt|hi|hello|coucou|cc)($|\s)/gm
-    );
+      if (userInput.match(greetings)) return "Bonjour";
+      return "je ne comprends pas";
+    },
+    sendUserMessage(text) {
+      this.messages.push({
+        text,
+        sender: "user",
+        type: "text",
+        actions: [],
+      });
+    },
+    sendReply(text, type, actions = null) {
+      this.messages.push({
+        text,
+        sender: "reply",
+        type,
+        actions,
+      });
+    },
+    send() {
+      if (this.userInput === "") return;
+      this.sendUserMessage(this.userInput);
 
-    if (this.userInput.match(greetings)) return "Bonjour";
-    return "je ne comprends pas";
-  }
-
-  private send(): void {
-    if (this.userInput === "") return;
-    this.messages.push({
-      text: this.userInput,
-      sender: "user",
-    });
-    // this.messages.push(this.randomReply());
-    this.messages.push({ text: this.scriptedReply(), sender: "reply" });
-    this.userInput = "";
-  }
-}
+      this.userInput = "";
+      this.$store.commit("nextStep");
+    },
+    story() {
+      // if (this.$store.getters.step === 1) console.log("Premier message");
+      this.sendReply(this.scriptedReply(), "text");
+    },
+  },
+  computed: {
+    step() {
+      return this.$store.getters.step;
+    },
+  },
+  watch: {
+    step() {
+      this.story();
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -98,5 +125,12 @@ export default class ChatBoard extends Vue {
 .chatbot-input > input:focus-within {
   border: none;
   outline: none;
+}
+
+.momo > img {
+  width: 256px;
+  position: fixed;
+  bottom: 63px;
+  right: 256px;
 }
 </style>
