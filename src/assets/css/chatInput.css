@@ -12,7 +12,7 @@
 	transform: translate(-50%, calc(var(--inputChatHeight) / 2));
 }
 
-input {
+.searchbar {
 	position: absolute;
 	height: var(--inputChatHeight);
 	width: var(--inputChatWidth);
@@ -21,17 +21,17 @@ input {
 	filter: drop-shadow(0px 5px 12px rgba(0, 0, 0, 0.05));
 }
 
-input,
-input:active,
-input:focus,
-input:target,
-input:focus-within,
-input:focus-visible {
+.searchbar,
+.searchbar:active,
+.searchbar:focus,
+.searchbar:target,
+.searchbar:focus-within,
+.searchbar:focus-visible {
 	border: 2px solid var(--green);
 	outline: none;
 }
 
-button {
+.btn-send {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -44,17 +44,17 @@ button {
 	border-radius: 50px;
 }
 
-button,
-button:active,
-button:focus,
-button:target,
-button:focus-within,
-button:focus-visible {
+.btn-send,
+.btn-send:active,
+.btn-send:focus,
+.btn-send:target,
+.btn-send:focus-within,
+.btn-send:focus-visible {
 	border: 2px solid var(--green);
 	outline: none;
 }
 
-button:hover {
+.btn-send:hover {
 	cursor: pointer;
-	opacity: 50%;
+	opacity: 0.5;
 }

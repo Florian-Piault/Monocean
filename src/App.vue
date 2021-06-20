@@ -29,7 +29,7 @@ export default Vue.extend({
 });
 </script>
 
-<style src="@/assets/css/reset.css">
+<style src="./assets/css/variables.css">
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

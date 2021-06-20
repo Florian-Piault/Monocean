@@ -17,7 +17,7 @@ import ChatFrame from "../components/ChatFrame.vue";
 export default class Home extends Vue {}
 </script>
 
-<style src="../assets/css/home.css">
+<style scope src="../assets/css/home.css">
 /* .home {
 	height: calc(100vh - var(--headerHeight));
 	display: flex;

@@ -1,13 +1,14 @@
 <template>
   <div class="input-container">
     <input
+      class="searchbar"
       type="text"
       autofocus
       placeholder="Écrire votre message…"
       v-model="userInput"
       @keyup.enter="sendMessage()"
     />
-    <button @click="sendMessage()">
+    <button class="btn-send" @click="sendMessage()">
       <span><img src="@/assets/send.svg" /></span>
       <span>Envoyer</span>
     </button>
@@ -32,4 +33,4 @@ export default {
 };
 </script>
 
-<style src="../assets/css/chatInput.css"></style>
+<style scope src="../assets/css/chatInput.css"></style>

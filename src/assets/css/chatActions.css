@@ -1,0 +1,34 @@
+@import './variables.css';
+
+.btn-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 0 12.5vw;
+}
+
+.btn-container > .btn-action {
+	height: var(--inputChatHeight);
+	width: var(--btnChatWidth);
+	/* background-color: var(--green); */
+	background-color: white;
+	border-radius: 50px;
+	margin-bottom: 8px;
+}
+
+.btn-action,
+.btn-action:active,
+.btn-action:focus,
+.btn-action:target,
+.btn-action:focus-within,
+.btn-action:focus-visible {
+	border: 2px solid var(--green);
+	outline: none;
+}
+
+.btn-action:hover {
+	cursor: pointer;
+	opacity: 0.5;
+}
