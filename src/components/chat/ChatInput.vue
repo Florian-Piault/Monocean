@@ -35,4 +35,4 @@ export default {
 };
 </script>
 
-<style scope src="../assets/css/chatInput.css"></style>
+<style scope src="../../assets/css/chatInput.css"></style>

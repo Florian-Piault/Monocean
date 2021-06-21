@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Header @showmenu="showMenuEvent(true)" />
+    <Header @showmenu="showMenuEvent(true)" :filter="showMenu" />
     <template v-if="showMenu">
       <transition appear mode="in-out" name="slide">
         <BurgerMenu @hidemenu="showMenuEvent(false)" />
       </transition>
     </template>
-    <router-view />
+    <router-view :filter="showMenu" />
   </div>
 </template>
 

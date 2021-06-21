@@ -1,9 +1,16 @@
 <template>
-  <div class="about">
+  <div class="about" :class="filter ? 'is-blurred' : ''">
     <!-- <h1>This is an about page</h1> -->
     <h1>ABOUT</h1>
   </div>
 </template>
+
+<script>
+export default {
+  name: "About",
+  props: ["filter"],
+};
+</script>
 
 <style scoped src="../assets/css/variables.css">
 .about {

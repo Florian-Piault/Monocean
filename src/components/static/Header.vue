@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :class="filter ? 'is-blurred' : ''">
     <!-- LEFT LOGOS -->
     <div class="header-action left">
       <span class="header-action-item" @click="showMenu()">
@@ -19,7 +19,7 @@
         <span class="action-label">Connexion </span>
       </span>
       <span class="header-action-item">
-        <img src="@/assets/info.svg" alt="help" tooltip="xdxdxd" />
+        <img src="@/assets/info.svg" alt="help" />
         <span class="action-label">Aide </span>
       </span>
       <span class="header-action-item">
@@ -30,16 +30,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue } from "vue-property-decorator";
-
-export default class Header extends Vue {
-  name = "Header";
-
-  private showMenu(): void {
-    this.$emit("showmenu");
-  }
-}
+<script>
+export default {
+  name: "Header",
+  props: ["filter"],
+  methods: {
+    showMenu() {
+      this.$emit("showmenu");
+    },
+  },
+};
 </script>
 
 <style src="../../assets/css/header.css"></style>

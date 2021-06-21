@@ -1,7 +1,7 @@
 <template>
   <div class="frame">
-    <img class="blob" src="../assets/blob.svg" alt="" />
-    <img class="blob2" src="../assets/blob2.svg" alt="" />
+    <img class="blob" src="../../assets/blob.svg" alt="" />
+    <img class="blob2" src="../../assets/blob2.svg" alt="" />
     <ChatInput @sending="sendMessage($event)" />
     <div ref="messages" class="messages">
       <template v-for="(message, index) in messages">
@@ -171,4 +171,4 @@ export default {
 };
 </script>
 
-<style scope src="../assets/css/chatFrame.css"></style>
+<style scope src="../../assets/css/chatFrame.css"></style>

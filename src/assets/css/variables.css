@@ -10,6 +10,11 @@ button {
 	font-weight: 600;
 }
 
+.is-blurred {
+	transition: 0.5s ease;
+	filter: blur(4px);
+}
+
 :root {
 	--yellow: #ffc91d;
 	--blue: #1d386d;
