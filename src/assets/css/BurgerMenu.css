@@ -1,0 +1,46 @@
+@import './variables.css';
+
+.burger-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100vh;
+	width: 256px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: var(--blue);
+	z-index: 3;
+	padding: 32px;
+}
+
+.burger-container > .burger-top {
+	flex: 1;
+}
+.burger-top > .burger-close:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.burger-container > .burger-mid {
+	flex: 4;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	color: white;
+}
+.burger-container > .burger-bot {
+	flex: 1;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+	transition: 0.5s ease-in-out;
+	left: 0;
+}
+
+.slide-enter,
+.slide-leave-to {
+	left: -256px;
+}

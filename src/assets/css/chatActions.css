@@ -5,30 +5,33 @@
 	flex-direction: row;
 	align-items: center;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	margin: 0 12.5vw;
 }
 
 .btn-container > .btn-action {
 	height: var(--inputChatHeight);
-	width: var(--btnChatWidth);
-	/* background-color: var(--green); */
+	width: var(--btnActionWidth);
+	border: 2px solid white;
 	background-color: white;
 	border-radius: 50px;
 	margin-bottom: 8px;
+	box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.05);
 }
 
-.btn-action,
+/* .btn-action,
 .btn-action:active,
 .btn-action:focus,
 .btn-action:target,
 .btn-action:focus-within,
 .btn-action:focus-visible {
 	border: 2px solid var(--green);
+	background-color: var(--green);
 	outline: none;
-}
+} */
 
 .btn-action:hover {
+	border: 2px solid var(--green);
+	background-color: var(--green);
 	cursor: pointer;
-	opacity: 0.5;
 }

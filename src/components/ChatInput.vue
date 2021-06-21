@@ -4,13 +4,15 @@
       class="searchbar"
       type="text"
       autofocus
-      placeholder="Écrire votre message…"
+      placeholder="Écrivez votre message…"
       v-model="userInput"
       @keyup.enter="sendMessage()"
     />
     <button class="btn-send" @click="sendMessage()">
-      <span><img src="@/assets/send.svg" /></span>
-      <span>Envoyer</span>
+      <!-- <span> -->
+      <img src="@/assets/send.svg" />
+      <!-- </span> -->
+      <!-- <span>Envoyer</span> -->
     </button>
   </div>
 </template>

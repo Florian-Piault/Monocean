@@ -1,30 +1,35 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <h1>LOGIN</h1>
-      <Login />
-      <h1>REGISTER</h1>
-      <Register v-if="false" />
-    </div>
-    <router-view /> -->
-    <Header />
-
+    <Header @showmenu="showMenuEvent(true)" />
+    <template v-if="showMenu">
+      <transition appear mode="in-out" name="slide">
+        <BurgerMenu @hidemenu="showMenuEvent(false)" />
+      </transition>
+    </template>
     <router-view />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
 import Header from "./components/static/Header.vue";
-// import Login from "./components/Auth/Login.vue";
-// import Register from "./components/Auth/Register.vue";
+import BurgerMenu from "./components/static/BurgerMenu.vue";
+
 export default Vue.extend({
+  name: "App",
   components: {
     Header,
-    // Login,
-    // Register,
+    BurgerMenu,
+  },
+  data() {
+    return {
+      showMenu: false,
+    };
+  },
+  methods: {
+    showMenuEvent(show) {
+      this.showMenu = show;
+    },
   },
 });
 </script>

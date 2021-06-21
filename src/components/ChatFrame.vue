@@ -1,15 +1,27 @@
 <template>
   <div class="frame">
+    <img class="blob" src="../assets/blob.svg" alt="" />
+    <img class="blob2" src="../assets/blob2.svg" alt="" />
     <ChatInput @sending="sendMessage($event)" />
     <div ref="messages" class="messages">
       <template v-for="(message, index) in messages">
-        <ChatText
-          :text="message.text"
-          :who="message.sender"
-          :key="'text-' + index"
-        />
+        <transition
+          appear
+          :key="'transitionText-' + index"
+          name="pop"
+          mode="out-in"
+        >
+          <ChatText :text="message.text" :who="message.sender" />
+        </transition>
         <template v-if="message.active">
-          <ChatActions :actions="message.actions" :key="'actions-' + index" />
+          <transition
+            appear
+            :key="'transitionActions-' + index"
+            name="pop"
+            mode="out-in"
+          >
+            <ChatActions :actions="message.actions" />
+          </transition>
         </template>
       </template>
     </div>
@@ -47,6 +59,25 @@ export default {
     };
   },
   methods: {
+    analyseMessage(message) {
+      // REGEX
+      const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
+      const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
+
+      // CONDITIONS
+      if (message.match(renameRX)) {
+        const name = message.split(" ").pop();
+        this.$store.commit("setUserName", name);
+        this.setBotMessage("Tu t'appelles donc " + name);
+        return;
+      }
+      if (message.match(ageRX)) {
+        const age = message.match(/\d+/)[0];
+        this.setBotMessage(`Tu as donc ${age} ans`);
+        return;
+      }
+      this.setBotMessage("HAHAHAHA");
+    },
     setUserMessage(text) {
       this.messages.push({
         text,
@@ -56,7 +87,7 @@ export default {
       });
       this.$store.commit("nextStep");
     },
-    setBotMessage(text, type, actions = []) {
+    setBotMessage(text, type = "text", actions = []) {
       this.messages.push({
         text,
         type,
@@ -67,7 +98,9 @@ export default {
     },
     sendMessage($event) {
       this.setUserMessage($event);
-      this.setBotMessage("HAHAHAHA", "text");
+      this.analyseMessage($event);
+
+      // automatic scroll when sending a message
       const divToScroll = this.$refs.messages;
       window.setTimeout(
         () =>
@@ -85,33 +118,24 @@ export default {
     const actions = [
       {
         action: () => this.$store.commit("nextStep", 1),
-        label: "Recherche",
+        label: "Étudiant",
       },
       {
         action: () => this.$store.commit("nextStep", 10),
-        label: "Contact",
+        label: "Professeur",
       },
       {
         action: () => this.$store.commit("nextStep", 10),
-        label: "Contact",
-      },
-      {
-        action: () => this.$store.commit("nextStep", 10),
-        label: "Contact",
-      },
-      {
-        action: () => this.$store.commit("nextStep", 10),
-        label: "Contact",
-      },
-      {
-        action: () => this.$store.commit("nextStep", 10),
-        label: "Contact",
+        label: "Autre",
       },
     ];
     this.setBotMessage(
-      `<p>Bonjour, je suis le Capitaine MOMO.<p>
-      <br/>
-       <p>Comment puis-je vous aider ?</p>`,
+      `<p>Salut ! Je suis Capitaine MOMO.<p>
+      <br />
+       <p>Dites-moi qu’est-ce que vous souhaitez chercher, je m’occupe du reste ! Vous pouvez utiliser aussi le vocal qui trouve à coté de la zone de texte. </p>
+       <br />
+       <p>Avant de partir, Vous êtes :</p>
+       `,
       "button",
       actions
     );

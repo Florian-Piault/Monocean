@@ -4,17 +4,10 @@
 	box-sizing: border-box;
 }
 
-@font-face {
-	font-family: Quicksand;
-	src: url('../font/Quicksand-Light.ttf') format('ttf');
-	src: url('../font/Quicksand-Bold.ttf') format('ttf');
-	src: url('../font/Quicksand-Medium.ttf') format('ttf');
-	src: url('../font/Quicksand-Regular.ttf') format('ttf');
-	src: url('../font/Quicksand-SemiBold.ttf') format('ttf');
-}
-
-body {
-	font-family: Quicksand, Fallback, sans-serif;
+body,
+button {
+	font-family: 'Quicksand', sans-serif;
+	font-weight: 600;
 }
 
 :root {
@@ -29,5 +22,6 @@ body {
 
 	--inputChatHeight: 48px;
 	--inputChatWidth: 50vw;
-	--btnChatWidth: 128px;
+	--btnChatWidth: 64px;
+	--btnActionWidth: 128px;
 }
