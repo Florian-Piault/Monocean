@@ -1,7 +1,7 @@
 <template>
   <div class="frame">
     <ChatInput @sending="sendMessage($event)" />
-    <div class="messages">
+    <div ref="messages" class="messages">
       <template v-for="(message, index) in messages">
         <ChatText
           :text="message.text"
@@ -55,6 +55,11 @@ export default {
         actions: [],
       });
       this.$store.commit("nextStep");
+      const divToScroll = this.$refs.messages;
+      window.setTimeout(
+        () => divToScroll.scrollTo(0, divToScroll.scrollHeight),
+        1
+      );
     },
     setBotMessage(text, type, actions = []) {
       this.messages.push({
@@ -64,6 +69,11 @@ export default {
         active: type === "button" ? true : false,
         actions,
       });
+      const divToScroll = this.$refs.messages;
+      window.setTimeout(
+        () => divToScroll.scrollTo(0, divToScroll.scrollHeight),
+        1
+      );
     },
     sendMessage($event) {
       this.setUserMessage($event);
