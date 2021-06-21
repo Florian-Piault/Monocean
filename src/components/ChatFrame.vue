@@ -55,11 +55,6 @@ export default {
         actions: [],
       });
       this.$store.commit("nextStep");
-      const divToScroll = this.$refs.messages;
-      window.setTimeout(
-        () => divToScroll.scrollTo(0, divToScroll.scrollHeight),
-        1
-      );
     },
     setBotMessage(text, type, actions = []) {
       this.messages.push({
@@ -69,15 +64,20 @@ export default {
         active: type === "button" ? true : false,
         actions,
       });
-      const divToScroll = this.$refs.messages;
-      window.setTimeout(
-        () => divToScroll.scrollTo(0, divToScroll.scrollHeight),
-        1
-      );
     },
     sendMessage($event) {
       this.setUserMessage($event);
       this.setBotMessage("HAHAHAHA", "text");
+      const divToScroll = this.$refs.messages;
+      window.setTimeout(
+        () =>
+          divToScroll.scrollTo({
+            bottom: 0,
+            top: divToScroll.scrollHeight,
+            behavior: "smooth",
+          }),
+        0
+      );
     },
   },
   mounted() {
