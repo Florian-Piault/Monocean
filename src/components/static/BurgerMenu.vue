@@ -1,5 +1,6 @@
 <template>
   <div class="burger-container">
+    <img class="burger-blob" src="../../assets/blob.svg" />
     <!-- TOP -->
     <div class="burger-top">
       <span class="burger-close" @click="hideMenu()">

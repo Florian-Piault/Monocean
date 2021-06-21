@@ -32,6 +32,7 @@
 
 <script>
 export default {
+  /* eslint-disable */
   name: "Header",
   props: ["filter"],
   methods: {
