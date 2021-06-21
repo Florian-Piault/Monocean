@@ -17,7 +17,9 @@
 
     <!-- BOTTOM -->
     <div class="burger-bot">
-      <button class="button-donation">Faire un don</button>
+      <button @click="goToDonation()" class="button-donation">
+        Faire un don
+      </button>
     </div>
   </div>
 </template>
@@ -29,6 +31,9 @@ export default {
   methods: {
     hideMenu() {
       this.$emit("hidemenu");
+    },
+    goToDonation() {
+      window.open("https://www.fondationdelamer.org/don.php", "_blank");
     },
   },
 };

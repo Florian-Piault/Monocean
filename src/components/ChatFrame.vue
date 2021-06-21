@@ -63,6 +63,8 @@ export default {
       // REGEX
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
       const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
+      const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
+      // const donationRX = new RegExp(/(un\sdon)|(une\sdonation)/gim);
 
       // CONDITIONS
       if (message.match(renameRX)) {
@@ -74,6 +76,21 @@ export default {
       if (message.match(ageRX)) {
         const age = message.match(/\d+/)[0];
         this.setBotMessage(`Tu as donc ${age} ans`);
+        return;
+      }
+      if (message.match(donationRX)) {
+        const actions = [
+          {
+            action: () =>
+              window.open("https://www.fondationdelamer.org/don.php", "_blank"),
+            label: "Faire un don",
+          },
+        ];
+        this.setBotMessage(
+          "Ce bouton amène vers les donations",
+          "button",
+          actions
+        );
         return;
       }
       this.setBotMessage("HAHAHAHA");
