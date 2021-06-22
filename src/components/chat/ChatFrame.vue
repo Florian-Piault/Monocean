@@ -1,8 +1,9 @@
 <template>
   <div class="frame">
+    <Dropdown v-if="ddOptions.length > 0" :options="ddOptions" />
     <img class="blob" src="../../assets/blob.svg" alt="" />
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
-    <ChatInput @sending="sendMessage($event)" />
+    <ChatInput @sending="sendMessage($event)" @showevent="showDrop($event)" />
     <div ref="messages" class="messages">
       <ChatFirstMsg @typechosen="typeChosen()" />
       <template v-for="(message, index) in messages">
@@ -47,6 +48,7 @@ import ChatInput from "./ChatInput.vue";
 import ChatText from "./ChatText.vue";
 import ChatActions from "./ChatActions.vue";
 import ChatFirstMsg from "./ChatFirstMsg.vue";
+import Dropdown from "../Dropdown.vue";
 /* eslint-disable */
 export default {
   name: "ChatFrame",
@@ -55,10 +57,12 @@ export default {
     ChatText,
     ChatActions,
     ChatFirstMsg,
+    Dropdown,
   },
   data() {
     return {
       messages: [],
+      ddOptions: [],
     };
   },
   methods: {
@@ -143,7 +147,11 @@ export default {
 
       if (type.match(/student/)) this.setBotMessage("Tu es donc un élève !");
       if (type.match(/prof/))
-        this.setBotMessage("Vous êtes donc un professeur");
+        this.setBotMessage("Vous êtes donc un professeur.");
+      if (type.match(/family/))
+        this.setBotMessage(
+          "Vous recherchez donc quelque chose pour un membre de votre famille."
+        );
       if (type.match(/curious/))
         this.setBotMessage("Vous êtes donc une personne curieuse !");
 
@@ -152,33 +160,9 @@ export default {
 
       this.scrollToBottom();
     },
-  },
-  mounted() {
-    // WELCOME MESSAGE
-    // const actions = [
-    //   {
-    //     action: () => this.$store.commit("nextStep", 1),
-    //     label: "Enseignant(e)",
-    //   },
-    //   {
-    //     action: () => this.$store.commit("nextStep", 10),
-    //     label: "Élève",
-    //   },
-    //   {
-    //     action: () => this.$store.commit("nextStep", 10),
-    //     label: "Autre",
-    //   },
-    // ];
-    // this.setBotMessage(
-    //   `<p>Salut ! Je suis Capitaine MOMO.<p>
-    //   <br />
-    //    <p>Dites-moi ce que vous souhaitez chercher et je m’occupe du reste ! Vous pouvez aussi utiliser le vocal qui trouve à coté de la zone de texte. </p>
-    //    <br />
-    //    <p>Avant de hisser les voiles, vous êtes :</p>
-    //    `,
-    //   "button",
-    //   actions
-    // );
+    showDrop($event) {
+      this.ddOptions = $event;
+    },
   },
   // SET STEP OF STORY
   computed: {

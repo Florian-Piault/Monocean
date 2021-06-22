@@ -9,10 +9,6 @@
         alt="Capitaine Momo"
       />
     </transition>
-    <!-- <iframe
-      src="https://www.fondationdelamer.org/don.php"
-      frameborder="0"
-    ></iframe> -->
   </div>
 </template>
 

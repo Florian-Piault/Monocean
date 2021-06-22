@@ -54,7 +54,12 @@
 	outline: none;
 }
 
+.btn-send.white {
+	background-color: transparent;
+	border: none;
+}
+
 .btn-send:hover {
 	cursor: pointer;
-	opacity: 0.5;
+	filter: brightness(0.9);
 }

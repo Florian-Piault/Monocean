@@ -5,12 +5,12 @@
     </div>
     <div class="message">
       <p>Salut ! Je suis Capitaine MOMO.</p>
+      <p>Bienvenue sur Monocean !</p>
+      <br />
       <p>
-        <br />
-      </p>
-      <p>
-        Dites-moi ce que vous souhaitez chercher et je m’occupe du reste ! Vous
-        pouvez aussi utiliser le vocal qui trouve à coté de la zone de texte.
+        Vous trouverez ici toutes les ressources pédagogiques concernant l’océan
+        et la mer ! Dites-moi ce que vous souhaitez chercher et je m’occupe du
+        reste !
       </p>
       <br />
       <p>Avant de hisser les voiles, vous êtes :</p>
@@ -27,6 +27,12 @@
         :class="isActive('student') ? 'active' : ''"
       >
         Élève
+      </button>
+      <button
+        @click="setType('family')"
+        :class="isActive('family') ? 'active' : ''"
+      >
+        Famille
       </button>
       <button
         @click="setType('curious')"
@@ -51,6 +57,7 @@ export default {
     setType(type) {
       if (type.match(/student/)) this.$store.commit("setUserType", "student");
       if (type.match(/prof/)) this.$store.commit("setUserType", "prof");
+      if (type.match(/family/)) this.$store.commit("setUserType", "family");
       if (type.match(/curious/)) this.$store.commit("setUserType", "curious");
 
       this.active = false;
@@ -62,6 +69,7 @@ export default {
 
       if (type.match(/student/) && type === chosenType) return true;
       if (type.match(/prof/) && type === chosenType) return true;
+      if (type.match(/family/) && type === chosenType) return true;
       if (type.match(/curious/) && type === chosenType) return true;
 
       return false;

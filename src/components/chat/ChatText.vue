@@ -16,7 +16,7 @@
     <!-- RIGHT -->
     <div class="profile-pic-right">
       <template v-if="who === 'user'">
-        <img class="profile-pic" src="../../assets/profile-pic-user.svg" />
+        <img class="profile-pic" src="../../assets/turtle.svg" />
         <span class="profile-pseudo">{{ $store.getters.user.name }}</span>
       </template>
     </div>
