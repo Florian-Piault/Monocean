@@ -4,6 +4,8 @@
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
     <ChatInput @sending="sendMessage($event)" />
     <div ref="messages" class="messages">
+      <ChatFirstMsg />
+
       <template v-for="(message, index) in messages">
         <transition
           appear
@@ -45,6 +47,7 @@
 import ChatInput from "./ChatInput.vue";
 import ChatText from "./ChatText.vue";
 import ChatActions from "./ChatActions.vue";
+import ChatFirstMsg from "./ChatFirstMsg.vue";
 /* eslint-disable */
 export default {
   name: "ChatFrame",
@@ -52,6 +55,7 @@ export default {
     ChatInput,
     ChatText,
     ChatActions,
+    ChatFirstMsg,
   },
   data() {
     return {
@@ -64,7 +68,6 @@ export default {
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
       const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
-      // const donationRX = new RegExp(/(un\sdon)|(une\sdonation)/gim);
 
       // CONDITIONS
       if (message.match(renameRX)) {
@@ -132,30 +135,30 @@ export default {
   },
   mounted() {
     // WELCOME MESSAGE
-    const actions = [
-      {
-        action: () => this.$store.commit("nextStep", 1),
-        label: "Étudiant",
-      },
-      {
-        action: () => this.$store.commit("nextStep", 10),
-        label: "Professeur",
-      },
-      {
-        action: () => this.$store.commit("nextStep", 10),
-        label: "Autre",
-      },
-    ];
-    this.setBotMessage(
-      `<p>Salut ! Je suis Capitaine MOMO.<p>
-      <br />
-       <p>Dites-moi qu’est-ce que vous souhaitez chercher, je m’occupe du reste ! Vous pouvez utiliser aussi le vocal qui trouve à coté de la zone de texte. </p>
-       <br />
-       <p>Avant de partir, Vous êtes :</p>
-       `,
-      "button",
-      actions
-    );
+    // const actions = [
+    //   {
+    //     action: () => this.$store.commit("nextStep", 1),
+    //     label: "Enseignant(e)",
+    //   },
+    //   {
+    //     action: () => this.$store.commit("nextStep", 10),
+    //     label: "Élève",
+    //   },
+    //   {
+    //     action: () => this.$store.commit("nextStep", 10),
+    //     label: "Autre",
+    //   },
+    // ];
+    // this.setBotMessage(
+    //   `<p>Salut ! Je suis Capitaine MOMO.<p>
+    //   <br />
+    //    <p>Dites-moi ce que vous souhaitez chercher et je m’occupe du reste ! Vous pouvez aussi utiliser le vocal qui trouve à coté de la zone de texte. </p>
+    //    <br />
+    //    <p>Avant de hisser les voiles, vous êtes :</p>
+    //    `,
+    //   "button",
+    //   actions
+    // );
   },
   // SET STEP OF STORY
   computed: {

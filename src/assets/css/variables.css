@@ -22,7 +22,8 @@ button {
 	--lightGrey: #eaf1f8;
 
 	--headerHeight: 95px;
-
+	--frameWidthBig: 45vw;
+	--frameWidthSmall: 90vw;
 	--momoWidth: 25vw;
 
 	--inputChatHeight: 48px;

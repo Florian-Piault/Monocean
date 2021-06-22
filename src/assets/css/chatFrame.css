@@ -3,10 +3,12 @@
 .frame {
 	position: relative;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: flex-start;
 	width: 100vw;
 	height: calc(100vh - var(--headerHeight));
 	background-color: var(--blue);
+	overflow: hidden;
 }
 
 .blob {

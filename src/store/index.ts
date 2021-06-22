@@ -11,7 +11,7 @@ export default new Vuex.Store({
       type: "autre",
     },
     bot: {
-      name: "MOMO",
+      name: "C. MOMO",
     },
   },
   getters: {
