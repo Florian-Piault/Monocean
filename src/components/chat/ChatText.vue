@@ -9,7 +9,9 @@
     </div>
 
     <!-- MIDDLE -->
-    <div class="text-container" :class="who" v-html="text"></div>
+    <div class="text-container" :class="who">
+      <div class="text" v-html="text"></div>
+    </div>
 
     <!-- RIGHT -->
     <div class="profile-pic-right">

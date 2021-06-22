@@ -9,7 +9,7 @@
 	left: 50%;
 	width: var(--inputChatWidth);
 	height: var(--inputChatHeight);
-	transform: translate(-50%, calc(var(--inputChatHeight) / 2));
+	transform: translate(-50%, -50%);
 }
 
 .searchbar {
