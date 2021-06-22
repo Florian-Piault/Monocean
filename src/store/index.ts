@@ -9,14 +9,14 @@ export default new Vuex.Store({
     step: 0,
     user: {
       name: "user",
-      type: "autre",
+      type: "other",
     },
     bot: {
       name: "C. MOMO",
     },
   },
   getters: {
-    firstMsg(state){
+    firstMsg(state) {
       return state.firstMsg;
     },
     step(state) {
@@ -30,10 +30,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    sendFirstMsg(state){
+    sendFirstMsg(state) {
       state.firstMsg = true;
-    }
-    ,
+    },
     nextStep(state, nb = 1) {
       state.step += nb;
     },

@@ -59,6 +59,14 @@
 	border: none;
 }
 
+.btn-send.white > .open {
+	transition: 0.2s;
+	transform: rotate(180deg);
+}
+.btn-send.white > .closed {
+	transition: 0.2s;
+}
+
 .btn-send:hover {
 	cursor: pointer;
 	filter: brightness(0.9);

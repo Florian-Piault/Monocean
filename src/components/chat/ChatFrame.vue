@@ -1,9 +1,17 @@
 <template>
   <div class="frame">
-    <Dropdown v-if="ddOptions.length > 0" :options="ddOptions" />
+    <template v-if="ddOptions">
+      <transition duration="200" appear name="pop" mode="out-in">
+        <Dropdown :options="ddOptions" :element="ddRef" />
+      </transition>
+    </template>
     <img class="blob" src="../../assets/blob.svg" alt="" />
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
-    <ChatInput @sending="sendMessage($event)" @showevent="showDrop($event)" />
+    <ChatInput
+      @sending="sendMessage($event)"
+      @showevent="showDrop"
+      :isOpen="ddOptions !== null"
+    />
     <div ref="messages" class="messages">
       <ChatFirstMsg @typechosen="typeChosen()" />
       <template v-for="(message, index) in messages">
@@ -62,28 +70,39 @@ export default {
   data() {
     return {
       messages: [],
-      ddOptions: [],
+      ddOptions: null,
+      ddRef: null,
     };
   },
   methods: {
     analyseMessage(message) {
+      const type = this.$store.getters.user.type;
+
       // REGEX
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
       const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
-
+      const searchRX = new RegExp(
+        /(recherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
+      );
       // CONDITIONS
+
+      // RENOMAGE
       if (message.match(renameRX)) {
         const name = message.split(" ").pop();
         this.$store.commit("setUserName", name);
-        this.setBotMessage("Tu t'appelles donc " + name);
-        return;
+        if (type === "curious" || type === "student")
+          return this.setBotMessage("Tu t'appelles donc " + name);
+        else return this.setBotMessage("Votre nom est donc " + name);
       }
+
+      // DONNER SON AGE
       if (message.match(ageRX)) {
         const age = message.match(/\d+/)[0];
-        this.setBotMessage(`Tu as donc ${age} ans`);
-        return;
+        return this.setBotMessage(`Tu as donc ${age} ans`);
       }
+
+      // FAIRE UNE DONATION
       if (message.match(donationRX)) {
         const actions = [
           {
@@ -92,14 +111,23 @@ export default {
             label: "Faire un don",
           },
         ];
-        this.setBotMessage(
+        return this.setBotMessage(
           "Ce bouton amène vers les donations",
           "button",
           actions
         );
-        return;
       }
-      this.setBotMessage("HAHAHAHA");
+
+      // RECHERCHE
+      if (message.match(searchRX)) {
+        const searchTerm = message.split(" ").pop();
+        return this.setBotMessage(`Voici des résultats sur : ${searchTerm}`);
+      }
+
+      // PAS COMPRIS
+      if (type === "curious" || type === "student")
+        this.setBotMessage("Je n'ai pas compris ce que tu as écris !");
+      else this.setBotMessage("Désolé, je n'ai pas compris.");
     },
     setUserMessage(text) {
       this.messages.push({
@@ -160,8 +188,14 @@ export default {
 
       this.scrollToBottom();
     },
-    showDrop($event) {
-      this.ddOptions = $event;
+    showDrop(option, ref) {
+      if (!this.ddOptions && !this.ddRef) {
+        this.ddOptions = option;
+        this.ddRef = ref;
+        return;
+      }
+      this.ddOptions = null;
+      this.ddRef = null;
     },
   },
   // SET STEP OF STORY

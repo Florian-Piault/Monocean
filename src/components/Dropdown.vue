@@ -1,10 +1,13 @@
 <template>
-  <div class="dd-wrapper">
+  <div
+    class="dd-wrapper"
+    :style="{ top: coordinates.y + 'px', left: coordinates.x + 'px' }"
+    ref="ddWrapper"
+  >
     <div class="dd-container">
-      <!-- <div class="dd-option" v-for="(option, index) in options" :key="index"> -->
-      <button class="dd-option" v-for="(option, index) in options" :key="index">
-        <img class="dd-icon" :src="require(`@/assets/${option.icon}`)" />
-        <div class="dd-label" v-html="option.label"></div>
+      <button class="dd-option" v-for="(button, index) in buttons" :key="index">
+        <img class="dd-icon" :src="require(`@/assets/${button.icon}`)" />
+        <div class="dd-label" v-html="button.label"></div>
       </button>
       <!-- </div> -->
     </div>
@@ -15,9 +18,27 @@
 /* eslint-disable */
 export default {
   name: "Dropdown",
-  props: ["options", "position"],
+  props: ["options", "element"],
+  data() {
+    return {
+      elementRect: undefined,
+      buttons: undefined,
+      coordinates: {
+        x: undefined,
+        y: undefined,
+      },
+    };
+  },
+  created() {
+    this.elementRect = this.element.getBoundingClientRect();
+    this.buttons = this.options;
+  },
   mounted() {
-    console.log(this.options);
+    const wrapperRect = this.$refs.ddWrapper.getBoundingClientRect();
+
+    // ELEMENT POS - HEADER HEIGHT - WRAPPER HEIGHT - PADDING
+    this.coordinates.y = this.elementRect.top - 95 - wrapperRect.height - 2;
+    this.coordinates.x = this.elementRect.right - wrapperRect.width;
   },
 };
 </script>

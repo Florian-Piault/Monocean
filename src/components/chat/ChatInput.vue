@@ -13,7 +13,11 @@
       <img src="@/assets/bottle.svg" height="24px" />
     </button>
     <button ref="ddBtnSend" v-else class="btn-send white" @click="showDrop()">
-      <img src="@/assets/up-arrow.svg" width="16px" />
+      <img
+        :class="isOpen ? 'open' : 'closed'"
+        src="@/assets/up-arrow.svg"
+        width="16px"
+      />
     </button>
   </div>
 </template>
@@ -26,6 +30,7 @@ import Dropdown from "../Dropdown.vue";
 export default {
   name: "ChatInput",
   components: { Dropdown },
+  props: ["isOpen"],
   data() {
     return {
       userInput: "",
@@ -41,7 +46,7 @@ export default {
       this.isFocused = focus;
     },
     showDrop() {
-      console.log(this.$refs.ddBtnSend);
+      const element = this.$refs.ddBtnSend;
       const options = [
         {
           label: "Activer le vocal",
@@ -56,7 +61,7 @@ export default {
           icon: "trash.svg",
         },
       ];
-      this.$emit("showevent", options);
+      this.$emit("showevent", options, element);
     },
   },
 };
