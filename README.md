@@ -1,4 +1,6 @@
-# client
+# MONOCEAN
+
+> github pages : https://florian-piault.github.io/Monocean/
 
 ## Project setup
 ```
