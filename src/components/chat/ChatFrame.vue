@@ -5,7 +5,6 @@
     <ChatInput @sending="sendMessage($event)" />
     <div ref="messages" class="messages">
       <ChatFirstMsg />
-
       <template v-for="(message, index) in messages">
         <transition
           appear
@@ -117,6 +116,8 @@ export default {
       });
     },
     sendMessage($event) {
+      if (!this.$store.getters.firstMsg) this.$store.commit("sendFirstMsg");
+
       this.setUserMessage($event);
       this.analyseMessage($event);
 

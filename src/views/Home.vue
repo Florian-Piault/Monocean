@@ -1,7 +1,12 @@
 <template>
   <div class="home" :class="filter ? 'is-blurred' : ''">
     <ChatFrame />
-    <img class="momo" src="@/assets/momo.gif" alt="Capitaine Momo" />
+    <img
+      v-if="!$store.getters.firstMsg"
+      class="momo"
+      src="@/assets/momo.gif"
+      alt="Capitaine Momo"
+    />
     <!-- <iframe
       src="https://www.fondationdelamer.org/don.php"
       frameborder="0"

@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    firstMsg: false,
     step: 0,
     user: {
       name: "user",
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    firstMsg(state){
+      return state.firstMsg;
+    },
     step(state) {
       return state.step;
     },
@@ -26,6 +30,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    sendFirstMsg(state){
+      state.firstMsg = true;
+    }
+    ,
     nextStep(state, nb = 1) {
       state.step += nb;
     },
