@@ -16,9 +16,24 @@
       <p>Avant de hisser les voiles, vous êtes :</p>
     </div>
     <div class="actions">
-      <button>Enseignant(e)</button>
-      <button>Élève</button>
-      <button>Curieux(se)</button>
+      <button
+        @click="setType('prof')"
+        :class="isActive('prof') ? 'active' : ''"
+      >
+        Enseignant(e)
+      </button>
+      <button
+        @click="setType('student')"
+        :class="isActive('student') ? 'active' : ''"
+      >
+        Élève
+      </button>
+      <button
+        @click="setType('curious')"
+        :class="isActive('curious') ? 'active' : ''"
+      >
+        Curieux(se)
+      </button>
     </div>
   </div>
 </template>
@@ -27,6 +42,31 @@
 /* eslint-disable */
 export default {
   name: "ChatFirstMsg",
+  data() {
+    return {
+      active: true,
+    };
+  },
+  methods: {
+    setType(type) {
+      if (type.match(/student/)) this.$store.commit("setUserType", "student");
+      if (type.match(/prof/)) this.$store.commit("setUserType", "prof");
+      if (type.match(/curious/)) this.$store.commit("setUserType", "curious");
+
+      this.active = false;
+
+      this.$emit("typechosen");
+    },
+    isActive(type) {
+      const chosenType = this.$store.getters.user.type;
+
+      if (type.match(/student/) && type === chosenType) return true;
+      if (type.match(/prof/) && type === chosenType) return true;
+      if (type.match(/curious/) && type === chosenType) return true;
+
+      return false;
+    },
+  },
 };
 </script>
 

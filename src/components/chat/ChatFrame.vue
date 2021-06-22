@@ -4,7 +4,7 @@
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
     <ChatInput @sending="sendMessage($event)" />
     <div ref="messages" class="messages">
-      <ChatFirstMsg />
+      <ChatFirstMsg @typechosen="typeChosen()" />
       <template v-for="(message, index) in messages">
         <transition
           appear
@@ -115,14 +115,9 @@ export default {
         actions,
       });
     },
-    sendMessage($event) {
-      if (!this.$store.getters.firstMsg) this.$store.commit("sendFirstMsg");
-
-      this.setUserMessage($event);
-      this.analyseMessage($event);
-
-      // automatic scroll when sending a message
+    scrollToBottom() {
       const divToScroll = this.$refs.messages;
+
       window.setTimeout(
         () =>
           divToScroll.scrollTo({
@@ -132,6 +127,30 @@ export default {
           }),
         0
       );
+    },
+    sendMessage($event) {
+      if (!this.$store.getters.firstMsg) this.$store.commit("sendFirstMsg");
+
+      this.setUserMessage($event);
+      this.analyseMessage($event);
+
+      // automatic scroll when sending a message
+      this.scrollToBottom();
+    },
+    typeChosen() {
+      const type = this.$store.getters.user.type;
+      this.messages = [];
+
+      if (type.match(/student/)) this.setBotMessage("Tu es donc un élève !");
+      if (type.match(/prof/))
+        this.setBotMessage("Vous êtes donc un professeur");
+      if (type.match(/curious/))
+        this.setBotMessage("Vous êtes donc une personne curieuse !");
+
+      // says that the 1st msg was sent
+      if (!this.$store.getters.firstMsg) this.$store.commit("sendFirstMsg");
+
+      this.scrollToBottom();
     },
   },
   mounted() {
