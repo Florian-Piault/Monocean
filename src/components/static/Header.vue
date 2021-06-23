@@ -15,11 +15,11 @@
     <!-- RIGHT LOGOS -->
     <div class="header-action right">
       <span class="header-action-item">
-        <img src="@/assets/auth.svg" alt="authentification" />
+        <img src="@/assets/turtle.svg" alt="authentification" height="48px" />
         <span class="action-label">Connexion </span>
       </span>
       <span class="header-action-item">
-        <img src="@/assets/info.svg" alt="help" />
+        <img src="@/assets/compass.svg" alt="help" />
         <span class="action-label">Aide </span>
       </span>
       <span class="header-action-item">

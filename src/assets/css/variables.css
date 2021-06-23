@@ -31,3 +31,11 @@ button {
 	--btnChatWidth: 64px;
 	--btnActionWidth: 128px;
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+a:hover {
+	opacity: 0.5;
+}

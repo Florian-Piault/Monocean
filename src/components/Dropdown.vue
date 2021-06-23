@@ -37,7 +37,7 @@ export default {
     const wrapperRect = this.$refs.ddWrapper.getBoundingClientRect();
 
     // ELEMENT POS - HEADER HEIGHT - WRAPPER HEIGHT - PADDING
-    this.coordinates.y = this.elementRect.top - 95 - wrapperRect.height - 2;
+    this.coordinates.y = this.elementRect.top - 95 - wrapperRect.height - 4;
     this.coordinates.x = this.elementRect.right - wrapperRect.width;
   },
 };

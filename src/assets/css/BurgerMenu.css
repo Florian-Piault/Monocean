@@ -10,7 +10,7 @@
 	top: 0;
 	left: 0;
 	background-color: var(--blue);
-	z-index: 3;
+	z-index: 10;
 	padding: 32px;
 }
 
@@ -72,4 +72,10 @@
 	bottom: 0;
 	left: -17px;
 	width: inherit;
+}
+
+.burger-items.pseudo {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }

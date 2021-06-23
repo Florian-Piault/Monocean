@@ -7,6 +7,13 @@
       </transition>
     </template>
 
+    <!-- MODALE SEARCH -->
+    <template v-if="modOptions">
+      <transition duration="200" appear name="pop" mode="out-in">
+        <Modale :options="modOptions" @closeevent="showModaleEvent()" />
+      </transition>
+    </template>
+
     <!-- BLOBS -->
     <img class="blob" src="../../assets/blob.svg" alt="" />
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
@@ -51,7 +58,11 @@
             name="pop"
             mode="out-in"
           >
-            <ChatSearches :searches="message.searches" /> {{ message.searches }}
+            <ChatSearches
+              :searches="message.searches"
+              @showmodale="showModaleEvent"
+            />
+            {{ message.searches }}
           </transition>
         </template>
       </template>
@@ -79,6 +90,8 @@ import ChatActions from "./ChatActions.vue";
 import ChatFirstMsg from "./ChatFirstMsg.vue";
 import ChatSearches from "./ChatSearches.vue";
 import Dropdown from "../Dropdown.vue";
+import Modale from "../Modale.vue";
+
 /* eslint-disable */
 export default {
   name: "ChatFrame",
@@ -88,6 +101,7 @@ export default {
     ChatActions,
     ChatFirstMsg,
     Dropdown,
+    Modale,
     ChatSearches,
   },
   data() {
@@ -95,6 +109,7 @@ export default {
       messages: [],
       ddOptions: null,
       ddRef: null,
+      modOptions: null,
     };
   },
   methods: {
@@ -135,7 +150,7 @@ export default {
 
       // REGEX
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
-      const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
+      const ageRX = new RegExp(/(ai\s)?\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
       const searchRX = new RegExp(
         /((re)?cherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
@@ -154,6 +169,7 @@ export default {
       // DONNER SON AGE
       if (message.match(ageRX)) {
         const age = message.match(/\d+/)[0];
+        this.$store.commit("setUserAge", age);
         return this.setBotMessage(`Tu as donc ${age} ans`);
       }
 
@@ -235,7 +251,11 @@ export default {
       const type = this.$store.getters.user.type;
       this.messages = [];
 
-      if (type.match(/student/)) this.setBotMessage("Tu es donc un élève !");
+      if (type.match(/student/)) {
+        let msg = "<p>Tu es donc un élève !<p>";
+        if (!this.$store.getters.user.age) msg += "<p>Quel âge as-tu ?</p>";
+        this.setBotMessage(msg);
+      }
       if (type.match(/prof/))
         this.setBotMessage("Vous êtes donc un professeur.");
       if (type.match(/family/))
@@ -258,6 +278,9 @@ export default {
       }
       this.ddOptions = null;
       this.ddRef = null;
+    },
+    showModaleEvent(search = "") {
+      !this.modOptions ? (this.modOptions = search) : (this.modOptions = null);
     },
   },
   // SET STEP OF STORY

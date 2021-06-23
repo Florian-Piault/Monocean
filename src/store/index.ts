@@ -10,6 +10,7 @@ export default new Vuex.Store({
     user: {
       name: "user",
       type: "other",
+      age: null,
     },
     bot: {
       name: "C. MOMO",
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     setUserType(state, type) {
       state.user.type = type;
+    },
+    setUserAge(state, age) {
+      state.user.age = age;
     },
   },
   actions: {},

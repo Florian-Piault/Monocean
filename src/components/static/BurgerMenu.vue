@@ -10,9 +10,18 @@
 
     <!-- MIDDLE -->
     <div class="burger-mid">
-      <span class="burger-items">Accueil</span>
+      <span class="burger-items pseudo">
+        <img src="../../assets/turtle.svg" />
+        {{ $store.getters.user.name }}
+        <img src="../../assets/edit.svg" />
+      </span>
+      <span class="burger-items"
+        ><router-link to="/">Accueil</router-link></span
+      >
       <span class="burger-items">À propos</span>
-      <span class="burger-items">Contact</span>
+      <span class="burger-items">
+        <router-link to="/contact">Contact</router-link>
+      </span>
       <span class="burger-items">Fondation de la mer</span>
     </div>
 
@@ -27,8 +36,10 @@
 
 <script>
 /* eslint-disable */
+import router from "../../router";
 export default {
   name: "BurgerMenu",
+  components: { router },
   methods: {
     hideMenu() {
       this.$emit("hidemenu");
@@ -40,4 +51,4 @@ export default {
 };
 </script>
 
-<style scope src="../../assets/css/BurgerMenu.css"></style>
+<style scoped src="../../assets/css/BurgerMenu.css"></style>

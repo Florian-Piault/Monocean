@@ -1,0 +1,55 @@
+@import './variables.css';
+
+.f-wrapper {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.f-container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	gap: 8px;
+}
+
+.newsletter {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.newsletter-btn {
+	flex: 1;
+}
+
+.newsletter-btn > input {
+	width: 33vw;
+}
+
+.newsletter-txt {
+	flex: 1;
+	position: relative;
+}
+
+.logos {
+	flex: 4;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.logos > img {
+	height: 128px;
+}
+
+.links {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}

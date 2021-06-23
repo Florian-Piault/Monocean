@@ -15,6 +15,11 @@
 	margin: 0 16px;
 }
 
+.search-container > .card:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
+
 .card > .card-img {
 	width: 256px;
 	height: 256px;
@@ -33,7 +38,4 @@
 
 .card-text > .card-type {
 	opacity: 0.5;
-}
-
-.card-text > .card-title {
 }

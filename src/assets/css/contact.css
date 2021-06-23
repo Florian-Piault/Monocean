@@ -1,0 +1,10 @@
+@import './variables.css';
+
+.home {
+	display: flex;
+	flex-direction: column;
+}
+
+.contact {
+	flex: 2;
+}

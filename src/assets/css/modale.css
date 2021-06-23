@@ -1,0 +1,46 @@
+@import './variables.css';
+
+.mod-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	width: 100vw;
+	height: calc(100vh - var(--headerHeight));
+	background-color: #0000007e;
+	z-index: 5;
+}
+
+.mod-container {
+	border-radius: 20px;
+	width: 80%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	background-color: var(--blue);
+}
+
+.mod-container > div {
+	width: 100%;
+}
+
+/* INSIDE CONTAINER */
+.mod-top,
+.mod-bot {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 16px;
+}
+
+.mod-mid {
+	flex: 4;
+}
+
+.mod-close:hover {
+	cursor: pointer;
+	opacity: 0.5;
+}

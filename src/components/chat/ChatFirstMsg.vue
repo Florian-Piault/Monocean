@@ -78,4 +78,4 @@ export default {
 };
 </script>
 
-<style scope src="../../assets/css/chatFirstMsg.css"></style>
+<style src="../../assets/css/chatFirstMsg.css"></style>

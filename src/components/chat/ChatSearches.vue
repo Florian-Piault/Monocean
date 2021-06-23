@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="search-container">
-      <div class="card" v-for="(search, index) in searches" :key="index">
+      <div
+        class="card"
+        v-for="(search, index) in searches"
+        :key="index"
+        @click="showModale(search)"
+      >
         <div
           class="card-img"
           :style="{
@@ -9,7 +14,6 @@
               'url(' + require('@/assets/img/' + search.image) + ')',
           }"
         ></div>
-        <!-- <img :src="require(`@/assets/img/${search.image}`)" alt="thumbnail" /> -->
         <div class="card-text">
           <div class="card-type">{{ search.type }}</div>
           <div class="card-title">{{ search.titre }}</div>
@@ -24,6 +28,11 @@
 export default {
   name: "ChatSearches",
   props: ["searches"],
+  methods: {
+    showModale(search) {
+      this.$emit("showmodale", search);
+    },
+  },
 };
 </script>
 

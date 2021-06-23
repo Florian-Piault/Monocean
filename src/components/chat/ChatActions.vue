@@ -27,4 +27,4 @@ export default {
 };
 </script>
 
-<style scope src="../../assets/css/chatActions.css"></style>
+<style scoped src="../../assets/css/chatActions.css"></style>
