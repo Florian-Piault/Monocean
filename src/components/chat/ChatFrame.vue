@@ -242,7 +242,7 @@ export default {
       if (!this.$store.getters.firstMsg) this.$store.commit("sendFirstMsg");
 
       this.setUserMessage($event);
-      this.analyseMessage($event);
+      this.analyseMessage($event.trim());
 
       // automatic scroll when sending a message
       this.scrollToBottom();

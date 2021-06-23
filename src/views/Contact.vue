@@ -1,6 +1,27 @@
 <template>
-  <div class="home" :class="filter ? 'is-blurred' : ''">
-    <div class="contact"></div>
+  <div class="contact-container" :class="filter ? 'is-blurred' : ''">
+    <div class="contact">
+      <div class="contact-item">
+        <input class="half" type="text" placeholder="Prénom" />
+        <input class="half" type="text" placeholder="Nom" />
+      </div>
+      <div class="contact-item">
+        <input type="text" placeholder="N° téléphone" />
+      </div>
+      <div class="contact-item">
+        <input type="text" placeholder="E-mail*" required />
+      </div>
+      <div class="contact-item">
+        <textarea placeholder="Message*" required />
+      </div>
+
+      <div class="contact-item">
+        <button class="send">
+          <img src="../assets/bottle.svg" width="16px" />
+          <span>Envoyer</span>
+        </button>
+      </div>
+    </div>
     <Footer />
   </div>
 </template>

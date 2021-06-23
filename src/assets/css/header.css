@@ -46,7 +46,14 @@
 	justify-content: center;
 }
 
+.header-container > .header-logo > img {
+	width: auto;
+}
+
 @media (max-width: 700px) {
+	.header-container > .header-logo > img {
+		width: 33vw;
+	}
 	.action-label {
 		display: none;
 	}

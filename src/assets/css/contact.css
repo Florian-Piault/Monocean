@@ -1,10 +1,63 @@
 @import './variables.css';
 
-.home {
+.contact-container {
+	height: calc(100vh - var(--headerHeight));
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 }
 
-.contact {
+.contact-container > .contact {
 	flex: 2;
+	background-color: var(--blue);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.contact-items > input,
+.contact-item > textarea {
+	font-family: 'Quicksand', sans-serif;
+	font-weight: 600;
+}
+
+.contact-item > .send {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--green);
+	border-radius: 50px;
+	border: 2px solid var(--green);
+	outline: none;
+	padding: 8px 16px;
+}
+
+.contact-item > .send:hover {
+	cursor: pointer;
+	filter: brightness(0.9);
+}
+
+.contact-item > .send > img {
+	margin-right: 8px;
+}
+
+.contact-item > input,
+.contact-item > textarea {
+	outline: none;
+	border: 1px solid white;
+	border-radius: 12px;
+	background-color: transparent;
+	width: 40vw;
+	height: 48px;
+	padding: 0 24px;
+	color: white;
+}
+
+.contact-item > .half {
+	width: 20vw;
 }
