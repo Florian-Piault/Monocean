@@ -6,7 +6,7 @@
       placeholder="Écrivez votre message…"
       v-model="userInput"
       @focus="setFocus(true)"
-      @blur="setFocus(false)"
+      @blur="userInput === '' ? setFocus(false) : ''"
       @keyup.enter="sendMessage()"
       enterkeyhint="send"
     />
@@ -42,6 +42,7 @@ export default {
   methods: {
     sendMessage() {
       if (this.userInput === "") return;
+      this.setFocus(false);
       this.$emit("sending", this.userInput).$nextTick((this.userInput = ""));
     },
     setFocus(focus) {
