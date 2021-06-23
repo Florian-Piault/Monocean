@@ -1,12 +1,17 @@
 <template>
   <div class="frame">
+    <!-- DROPDOWN INPUT OPTIONS -->
     <template v-if="ddOptions">
       <transition duration="200" appear name="pop" mode="out-in">
         <Dropdown :options="ddOptions" :element="ddRef" />
       </transition>
     </template>
+
+    <!-- BLOBS -->
     <img class="blob" src="../../assets/blob.svg" alt="" />
     <img class="blob2" src="../../assets/blob2.svg" alt="" />
+
+    <!-- INPUTS -->
     <ChatInput
       @sending="sendMessage($event)"
       @showevent="showDrop"
@@ -14,6 +19,8 @@
     />
     <div ref="messages" class="messages">
       <ChatFirstMsg @typechosen="typeChosen()" />
+
+      <!-- MESSAGES TEXTES -->
       <template v-for="(message, index) in messages">
         <transition
           appear
@@ -23,6 +30,8 @@
         >
           <ChatText :text="message.text" :who="message.sender" />
         </transition>
+
+        <!-- MESSAGES BUTTONS -->
         <template v-if="message.active">
           <transition
             appear
@@ -31,6 +40,18 @@
             mode="out-in"
           >
             <ChatActions :actions="message.actions" />
+          </transition>
+        </template>
+
+        <!-- MESSAGES SEARCHES -->
+        <template v-if="message.searches">
+          <transition
+            appear
+            :key="'transitionSearch-' + index"
+            name="pop"
+            mode="out-in"
+          >
+            <ChatSearches :searches="message.searches" /> {{ message.searches }}
           </transition>
         </template>
       </template>
@@ -56,6 +77,7 @@ import ChatInput from "./ChatInput.vue";
 import ChatText from "./ChatText.vue";
 import ChatActions from "./ChatActions.vue";
 import ChatFirstMsg from "./ChatFirstMsg.vue";
+import ChatSearches from "./ChatSearches.vue";
 import Dropdown from "../Dropdown.vue";
 /* eslint-disable */
 export default {
@@ -66,6 +88,7 @@ export default {
     ChatActions,
     ChatFirstMsg,
     Dropdown,
+    ChatSearches,
   },
   data() {
     return {
@@ -75,6 +98,38 @@ export default {
     };
   },
   methods: {
+    getSearches(term) {
+      if (term.match(/tortues?/i)) {
+        return [
+          {
+            type: "Article",
+            image: "turtle1.jpg",
+            titre: "La relation des tortues avec les coraux",
+          },
+          {
+            type: "Article",
+            image: "turtle2.jpg",
+            titre: "Les tortues et l'eau salée.",
+          },
+          {
+            type: "Article",
+            image: "turtle3.jpg",
+            titre:
+              "Les conséquences de la pollution aquatique sur les tortues.",
+          },
+          {
+            type: "Article",
+            image: "turtle4.jpg",
+            titre: "Les tortues : de bébé à adulte.",
+          },
+          {
+            type: "Article",
+            image: "turtle5.jpg",
+            titre: "L'alimentation des tortues.",
+          },
+        ];
+      }
+    },
     analyseMessage(message) {
       const type = this.$store.getters.user.type;
 
@@ -83,7 +138,7 @@ export default {
       const ageRX = new RegExp(/ai\s\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
       const searchRX = new RegExp(
-        /(recherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
+        /((re)?cherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
       );
       // CONDITIONS
 
@@ -121,7 +176,13 @@ export default {
       // RECHERCHE
       if (message.match(searchRX)) {
         const searchTerm = message.split(" ").pop();
-        return this.setBotMessage(`Voici des résultats sur : ${searchTerm}`);
+        const searchesArr = this.getSearches(searchTerm);
+        return this.setBotMessage(
+          `Voici des résultats sur : ${searchTerm}`,
+          "search",
+          [],
+          searchesArr
+        );
       }
 
       // PAS COMPRIS
@@ -138,13 +199,14 @@ export default {
       });
       this.$store.commit("nextStep");
     },
-    setBotMessage(text, type = "text", actions = []) {
+    setBotMessage(text, type = "text", actions = [], searches = []) {
       this.messages.push({
         text,
         type,
         sender: "bot",
         active: type === "button" ? true : false,
         actions,
+        searches,
       });
     },
     scrollToBottom() {

@@ -8,6 +8,8 @@
       @focus="setFocus(true)"
       @blur="setFocus(false)"
       @keyup.enter="sendMessage()"
+      enterkeyhint="send"
+    />
     />
     <button v-if="isFocused" class="btn-send" @click="sendMessage()">
       <img src="@/assets/bottle.svg" height="24px" />

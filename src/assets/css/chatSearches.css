@@ -1,0 +1,39 @@
+@import './variables.css';
+
+.search-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+
+.search-container > .card {
+	width: 256px;
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+	margin: 0 16px;
+}
+
+.card > .card-img {
+	width: 256px;
+	height: 256px;
+	border-radius: 20px 20px 0 0;
+	background: no-repeat center;
+	background-size: cover;
+}
+
+.card > .card-text {
+	background-color: white;
+	padding: 8px 16px;
+	color: var(--blue);
+	height: 100px;
+	border-radius: 0 0 20px 20px;
+}
+
+.card-text > .card-type {
+	opacity: 0.5;
+}
+
+.card-text > .card-title {
+}
