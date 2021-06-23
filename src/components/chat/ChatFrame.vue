@@ -150,7 +150,8 @@ export default {
 
       // REGEX
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
-      const ageRX = new RegExp(/(ai\s)?\d+(\s)?ans?/gim);
+      const ageRX = new RegExp(/\d+(\s)?((an)?s?)/gim);
+      // const ageRX = new RegExp(/(ai\s)?\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
       const searchRX = new RegExp(
         /((re)?cherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
