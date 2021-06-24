@@ -151,12 +151,10 @@ export default {
       // REGEX
       const renameRX = new RegExp(/(mon nom est|(suis|appelle))\s[a-z]+/gim);
       const ageRX = new RegExp(/\d+(\s)?((an)?s?)/gim);
-      // const ageRX = new RegExp(/(ai\s)?\d+(\s)?ans?/gim);
       const donationRX = new RegExp(/(donations?)|(dons?)($|[^a-z])/gim);
       const searchRX = new RegExp(
         /((re)?cherche|trouve)[srz]?((-|\s)?(moi|nous))?\s?(([ld]es)?\s?((info)?(rmation)|(d[eé]tail)|(m[eé]dia)|(article)|([eé]tude)|(renseignement)|(donn[ée]e))?s?\s)?((sur|pour)\s)?([ld]es)?\s?[a-z]{3,}/gim
       );
-      // CONDITIONS
 
       // RENOMAGE
       if (message.match(renameRX)) {
@@ -171,7 +169,9 @@ export default {
       if (message.match(ageRX)) {
         const age = message.match(/\d+/)[0];
         this.$store.commit("setUserAge", age);
-        return this.setBotMessage(`Tu as donc ${age} ans`);
+        if (type === "curious" || type === "student")
+          return this.setBotMessage(`Tu as donc ${age} ans`);
+        else return this.setBotMessage(`Vous avez donc ${age} ans`);
       }
 
       // FAIRE UNE DONATION

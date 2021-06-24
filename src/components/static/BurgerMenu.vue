@@ -22,7 +22,10 @@
       <span class="burger-items">
         <router-link to="/contact">Contact</router-link>
       </span>
-      <span class="burger-items">Fondation de la mer</span>
+      <span class="burger-items">Q&A</span>
+      <span class="burger-items link" @click="goToFDM()"
+        >Fondation de la mer</span
+      >
     </div>
 
     <!-- BOTTOM -->
@@ -46,6 +49,9 @@ export default {
     },
     goToDonation() {
       window.open("https://www.fondationdelamer.org/don.php", "_blank");
+    },
+    goToFDM() {
+      window.open("http://www.fondationdelamer.org/", "_blank");
     },
   },
 };
