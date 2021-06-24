@@ -28,6 +28,7 @@ button {
 
 	--inputChatHeight: 48px;
 	--inputChatWidth: 50vw;
+	--inputChatWidthSmall: 60vw;
 	--btnChatWidth: 64px;
 	--btnActionWidth: 128px;
 }
